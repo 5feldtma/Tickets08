@@ -60,7 +60,7 @@ public class KassenWerkzeug
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
                 _datumAuswaehlWerkzeug.getUIPanel(),
                 _vorstellungAuswaehlWerkzeug.getUIPanel());
-        //TODO move to verkaufen button
+        //TODO move to Verkaufen button
         _bezahlWerkzeug.showDialog();
 
         registriereUIAktionen();
