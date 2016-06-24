@@ -8,6 +8,7 @@ import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kino;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Tagesplan;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.SubwerkzeugObserver;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahlvorgang.BezahlWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.datumsauswaehler.DatumAuswaehlWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.platzverkauf.PlatzVerkaufsWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.vorstellungsauswaehler.VorstellungsAuswaehlWerkzeug;
@@ -32,6 +33,7 @@ public class KassenWerkzeug
     private PlatzVerkaufsWerkzeug _platzVerkaufsWerkzeug;
     private DatumAuswaehlWerkzeug _datumAuswaehlWerkzeug;
     private VorstellungsAuswaehlWerkzeug _vorstellungAuswaehlWerkzeug;
+	private BezahlWerkzeug _bezahlWerkzeug;
 
     /**
      * Initialisiert das Kassenwerkzeug.
@@ -50,6 +52,7 @@ public class KassenWerkzeug
         _platzVerkaufsWerkzeug = new PlatzVerkaufsWerkzeug();
         _datumAuswaehlWerkzeug = new DatumAuswaehlWerkzeug();
         _vorstellungAuswaehlWerkzeug = new VorstellungsAuswaehlWerkzeug();
+        _bezahlWerkzeug = new BezahlWerkzeug();
 
         erzeugeListenerFuerSubwerkzeuge();
 
@@ -57,6 +60,8 @@ public class KassenWerkzeug
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
                 _datumAuswaehlWerkzeug.getUIPanel(),
                 _vorstellungAuswaehlWerkzeug.getUIPanel());
+        //TODO move to verkaufen button
+        _bezahlWerkzeug.showDialog();
 
         registriereUIAktionen();
         setzeTagesplanFuerAusgewaehltesDatum();
@@ -129,6 +134,7 @@ public class KassenWerkzeug
     private void reagiereAufBeendenButton()
     {
         _ui.schliesseFenster();
+        _bezahlWerkzeug.closeDialog();
     }
 
     /**
