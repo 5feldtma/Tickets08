@@ -21,7 +21,6 @@ public class BezahlWerkzeugUI {
 	private JDialog _dialog;
 	private JButton _bestaetigenButton;
 	private JButton _abbrechenButton;
-	private JLabel _preisLabel;
 	private JTextField _eingabeFeld;
 	
 	public BezahlWerkzeugUI()
@@ -81,5 +80,26 @@ public class BezahlWerkzeugUI {
     private JPanel erstelleTastatur()
     {
     	return new NumPad();	
+    }
+    
+    public String getInput()
+    {
+    	return _eingabeFeld.getText();
+    }
+    
+    /**
+     * Gibt den Bestaetigen-Button zurück.
+     */
+    public JButton getBestaetigenButton()
+    {
+        return _bestaetigenButton;
+    }
+    
+    /**
+     * Gibt den Abbrechen-Button zurück.
+     */
+    public JButton getAbbrechenButton()
+    {
+        return _abbrechenButton;
     }
 }
