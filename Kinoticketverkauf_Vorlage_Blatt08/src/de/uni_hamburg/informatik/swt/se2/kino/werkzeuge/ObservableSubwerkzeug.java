@@ -54,6 +54,7 @@ public abstract class ObservableSubwerkzeug
         _alleBeobachter.remove(beobachter);
     }
 
+    
     /**
      * Informiert alle an diesem Subwerkzeug registrierten Beobachter über eine
      * Änderung.
@@ -61,11 +62,11 @@ public abstract class ObservableSubwerkzeug
      * Diese Methode muss von der erbenden Klasse immer dann aufgerufen werden,
      * wenn eine Änderung geschehen ist, die für Beobachter interessant ist.
      */
-    protected void informiereUeberAenderung()
+    protected void informiereUeberAenderung(String arg)
     {
         for (SubwerkzeugObserver beobachter : _alleBeobachter)
         {
-            beobachter.reagiereAufAenderung();
+            beobachter.reagiereAufAenderung(arg);
         }
     }
 }
