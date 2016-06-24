@@ -17,11 +17,13 @@ public class NumPad extends JPanel {
         public NumPad() {
             setLayout(new GridLayout(4, 3));
             actionHandler = new ActionHandler();
+            //füllt das Grid mit Buttons
             for (int index = 0; index < 12; index++) {
                 add(createButton(index));
             }
         }
 
+        //macht neue Buttons direkt inklusive Actionlistener
         protected JButton createButton(int index) {
             JButton btn = new JButton(buttonLabels[index]);
             //Buttons unfocusable damit man immer in der Preiseingabe bleibt
@@ -45,7 +47,7 @@ public class NumPad extends JPanel {
                     	{
                     		tf.setText(tf.getText() + ',');
                     	}
-                    	else if (label == "<--")
+                    	else if (label == "<--") //rücktaste
                     	{
                     		{
                     			String currentText = tf.getText().trim();
