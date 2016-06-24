@@ -35,6 +35,7 @@ public class VerkaufsFensterUI
         _verkaufsDialog.setLayout(new GridLayout(3, 1));
         _verkaufsDialog.add(_preis);
         _verkaufsDialog.add(_erhaltenerBetrag);
+        _erhaltenerBetrag.setEditable(false);
         _verkaufsDialog.add(_rueckgeld);
         
         _bestaetigung.setLayout(new FlowLayout());
@@ -43,6 +44,7 @@ public class VerkaufsFensterUI
         
         _frame.add(_tastatur);
         _frame.setVisible(true);
+        _frame.pack();
         
         _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//nur für Testzwecke vorhanden (muss noch raus)
     }
