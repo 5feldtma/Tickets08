@@ -38,7 +38,7 @@ public class VorstellungsAuswaehlWerkzeug extends ObservableSubwerkzeug
      */
     private void vorstellungWurdeAusgewaehlt()
     {
-        informiereUeberAenderung();
+        informiereUeberAenderung("Vorstellung ausgewählt");
     }
 
     /**
