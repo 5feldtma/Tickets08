@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Platz;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kinosaal;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 
 /**
  * Mit diesem Werkzeug können Plätze verkauft und storniert werden. Es arbeitet
@@ -21,12 +22,13 @@ import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
  * @author SE2-Team
  * @version SoSe 2016
  */
-public class PlatzVerkaufsWerkzeug
+public class PlatzVerkaufsWerkzeug extends ObservableSubwerkzeug
 {
     // Die aktuelle Vorstellung, deren Plätze angezeigt werden. Kann null sein.
     private Vorstellung _vorstellung;
 
     private PlatzVerkaufsWerkzeugUI _ui;
+    private int _preis;
 
     /**
      * Initialisiert das PlatzVerkaufsWerkzeug.
@@ -60,7 +62,8 @@ public class PlatzVerkaufsWerkzeug
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                fuehreBarzahlungDurch();
+            	//TODO Voll am Ziel vorbei? oder ok?
+                informiereUeberAenderung("Verkaufen");
             }
         });
 
@@ -85,10 +88,11 @@ public class PlatzVerkaufsWerkzeug
                 });
     }
 
-    /**
+
+	/**
      * Startet die Barzahlung.
      */
-    private void fuehreBarzahlungDurch()
+    public void fuehreBarzahlungDurch()
     {
         verkaufePlaetze(_vorstellung);
     }
@@ -113,9 +117,10 @@ public class PlatzVerkaufsWerkzeug
     {
         if (istVerkaufenMoeglich(plaetze))
         {
-            int preis = _vorstellung.getPreisFuerPlaetze(plaetze);
+            _preis = _vorstellung.getPreisFuerPlaetze(plaetze);
             _ui.getPreisLabel().setText(
-                    "Gesamtpreis: " + preis + " Eurocent");
+                    "Gesamtpreis: " + _preis + " Eurocent");
+           
         }
         else if (istStornierenMoeglich(plaetze))
         {
@@ -125,14 +130,17 @@ public class PlatzVerkaufsWerkzeug
         }
         else if (!plaetze.isEmpty())
         {
+        	_preis = -1;
             _ui.getPreisLabel().setText(
                     "Verkauf und Storno nicht gleichzeitig möglich!");
         }
         else
         {
+        	_preis = -1;
             _ui.getPreisLabel().setText(
-                    "Gesamtpreis: 0 Eurocent");
+                    "Gesamtpreis: 0 Eurocent"); 
         }
+        informiereUeberAenderung("Aktualisieren");
     }
 
     /**
@@ -165,7 +173,7 @@ public class PlatzVerkaufsWerkzeug
     /**
      * Aktualisiert den Platzplan basierend auf der ausgwählten Vorstellung.
      */
-    private void aktualisierePlatzplan()
+    public void aktualisierePlatzplan()
     {
         if (_vorstellung != null)
         {
@@ -225,4 +233,10 @@ public class PlatzVerkaufsWerkzeug
         vorstellung.stornierePlaetze(plaetze);
         aktualisierePlatzplan();
     }
+    
+    public int getAktuellenPreis()
+    {
+    	return _preis;
+    }
+
 }

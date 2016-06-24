@@ -34,6 +34,7 @@ public class KassenWerkzeug
     private DatumAuswaehlWerkzeug _datumAuswaehlWerkzeug;
     private VorstellungsAuswaehlWerkzeug _vorstellungAuswaehlWerkzeug;
 	private BezahlWerkzeug _bezahlWerkzeug;
+	
 
     /**
      * Initialisiert das Kassenwerkzeug.
@@ -60,8 +61,7 @@ public class KassenWerkzeug
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
                 _datumAuswaehlWerkzeug.getUIPanel(),
                 _vorstellungAuswaehlWerkzeug.getUIPanel());
-        //TODO move to Verkaufen button
-        _bezahlWerkzeug.showDialog();
+        
 
         registriereUIAktionen();
         setzeTagesplanFuerAusgewaehltesDatum();
@@ -78,7 +78,7 @@ public class KassenWerkzeug
         _datumAuswaehlWerkzeug.registriereBeobachter(new SubwerkzeugObserver()
         {
             @Override
-            public void reagiereAufAenderung()
+            public void reagiereAufAenderung(String arg)
             {
                 setzeTagesplanFuerAusgewaehltesDatum();
             }
@@ -88,13 +88,46 @@ public class KassenWerkzeug
                 .registriereBeobachter(new SubwerkzeugObserver()
                 {
                     @Override
-                    public void reagiereAufAenderung()
+                    public void reagiereAufAenderung(String arg)
                     {
                         setzeAusgewaehlteVorstellung();
                     }
                 });
+        
+        _platzVerkaufsWerkzeug
+	        .registriereBeobachter(new SubwerkzeugObserver()
+	        {
+	            @Override
+	            public void reagiereAufAenderung(String arg)
+	            {
+	            	if (arg.equals("Aktualisieren"))
+	            	{
+	            		aktualisiereBezahlFenster();
+	            	}
+	            	else if(arg.equals("Verkaufen"))
+	            	{
+	            		oeffneBezahlFenster();
+	            	}
+	            }
+	        });
+        _bezahlWerkzeug
+	        .registriereBeobachter(new SubwerkzeugObserver()
+	        {
+	            @Override
+	            public void reagiereAufAenderung(String arg)
+	            {
+	            	if (arg.equals("Verkauf"))
+	            	{
+	            		_platzVerkaufsWerkzeug.fuehreBarzahlungDurch();
+	            	}
+	            	else if(arg.equals("Abbruch"))
+	            	{
+	            		_platzVerkaufsWerkzeug.aktualisierePlatzplan();
+	            	}
+	            }
+	        });
     }
-
+    
     /**
      * Fügt die Funktionalitat zum Beenden-Button hinzu.
      */
@@ -127,6 +160,23 @@ public class KassenWerkzeug
     {
         _platzVerkaufsWerkzeug.setVorstellung(getAusgewaehlteVorstellung());
     }
+    
+    /**
+     * Aktualisiert das Bezahlfenster.
+     */
+    private void aktualisiereBezahlFenster()
+    {
+    	_bezahlWerkzeug.aktualisierePreis(getAktuellenPreis());
+    }
+    
+    /**
+     * Öffnet das Bezahlfenster
+     */
+    private void oeffneBezahlFenster()
+    {
+    	_bezahlWerkzeug.showDialog();
+    }
+    
 
     /**
      * Beendet die Anwendung.
@@ -135,6 +185,11 @@ public class KassenWerkzeug
     {
         _ui.schliesseFenster();
         _bezahlWerkzeug.closeDialog();
+    }
+    
+    private int getAktuellenPreis()
+    {
+    	return _platzVerkaufsWerkzeug.getAktuellenPreis();
     }
 
     /**

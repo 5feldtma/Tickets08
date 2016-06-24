@@ -22,6 +22,7 @@ public class BezahlWerkzeugUI {
 	private JButton _bestaetigenButton;
 	private JButton _abbrechenButton;
 	private JTextField _eingabeFeld;
+	private JLabel _preisLabel;
 	
 	public BezahlWerkzeugUI()
     {
@@ -37,24 +38,31 @@ public class BezahlWerkzeugUI {
         JDialog dialog = new JDialog();
         dialog.setLayout(new BorderLayout());
 
-        JPanel preisPanel = new JPanel(new BorderLayout());
+        JPanel linkesPanel = new JPanel(new BorderLayout());
+        JPanel linksObenPanel = new JPanel(new BorderLayout());
+        JPanel linksUntenPanel = new JPanel(new BorderLayout());
+        
+        linkesPanel.add(linksObenPanel, BorderLayout.NORTH);
+        linkesPanel.add(linksUntenPanel, BorderLayout.SOUTH);
 
+        _preisLabel = new JLabel("0");
         _eingabeFeld = new JTextField();
-
-        preisPanel.add(_eingabeFeld, BorderLayout.NORTH);
+        
+        linksObenPanel.add(_preisLabel, BorderLayout.NORTH);
+        linksObenPanel.add(_eingabeFeld, BorderLayout.SOUTH);
         _bestaetigenButton = new JButton("OK");
         //Buttons unfocusable damit man immer in der Preiseingabe bleibt
         _bestaetigenButton.setFocusable(false);
-        preisPanel.add(_bestaetigenButton, BorderLayout.WEST);    
+        linksUntenPanel.add(_bestaetigenButton, BorderLayout.WEST);    
         _abbrechenButton = new JButton("Abbrechen");
         //Buttons unfocusable damit man immer in der Preiseingabe bleibt
         _abbrechenButton.setFocusable(false);
-        preisPanel.add(_abbrechenButton, BorderLayout.EAST);
+        linksUntenPanel.add(_abbrechenButton, BorderLayout.EAST);
         
         
         JPanel tastaturPanel = erstelleTastatur();   
         
-        dialog.add(preisPanel, BorderLayout.WEST);
+        dialog.add(linkesPanel, BorderLayout.WEST);
         dialog.add(tastaturPanel, BorderLayout.EAST);
         
 
@@ -73,6 +81,11 @@ public class BezahlWerkzeugUI {
     	_dialog.setVisible(true);
     }
     
+    public void hideDialog()
+    {
+    	_dialog.setVisible(false);
+    }
+    
     public void closeDialog(){
     	_dialog.dispose();
     }
@@ -85,6 +98,19 @@ public class BezahlWerkzeugUI {
     public String getInput()
     {
     	return _eingabeFeld.getText();
+    }
+    
+    public void aktualisierePreisAnzeige(String preis)
+    {
+    	if(preis.equals("-1"))
+    	{
+    		_preisLabel.setText("Kann nicht verkaufen.");
+    	}
+    	else 
+    	{	
+    		
+    		_preisLabel.setText(preis);
+    	}
     }
     
     /**
@@ -102,4 +128,18 @@ public class BezahlWerkzeugUI {
     {
         return _abbrechenButton;
     }
+    
+    /**
+     * Gibt das Eingabefeld zurück.
+     */
+    public JTextField getEingabeFeld()
+    {
+        return _eingabeFeld;
+    }
+    
+    public String getPreis()
+    {
+    	return _preisLabel.getText();
+    }
+    
 }
