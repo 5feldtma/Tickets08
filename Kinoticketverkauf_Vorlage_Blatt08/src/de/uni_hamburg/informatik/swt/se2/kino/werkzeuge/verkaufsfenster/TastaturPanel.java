@@ -9,7 +9,7 @@ public class TastaturPanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
     private String[] txt = {"7", "8", "9", "4", "5", "6", "1", "2", "3",
-            "Reset", "0", "Enter"};
+            "Reset", "0", "Löschen"};
     private JButton[] _buttonArray = new JButton[12];
 
     public TastaturPanel()
@@ -26,4 +26,8 @@ public class TastaturPanel extends JPanel
         setVisible(true);
     }
 
+    public JButton getButton(int index)
+    {
+        return _buttonArray[index];
+    }
 }

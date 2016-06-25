@@ -31,6 +31,8 @@ public class PlatzVerkaufsWerkzeug
     private PlatzVerkaufsWerkzeugUI _ui;
     
     private VerkaufsFensterWerkzeug _verkaufsFensterWerkzeug;//Subwerkzeug
+    
+    private int _derzeitigerPreis;//eigentlich wäre dieser Wert einfach über den Service erreichbar
 
     /**
      * Initialisiert das PlatzVerkaufsWerkzeug.
@@ -39,6 +41,7 @@ public class PlatzVerkaufsWerkzeug
     {
         _ui = new PlatzVerkaufsWerkzeugUI();
         _verkaufsFensterWerkzeug = new VerkaufsFensterWerkzeug();
+        
         _verkaufsFensterWerkzeug.registriereBeobachter(new SubwerkzeugObserver()
         {
             @Override
@@ -73,7 +76,7 @@ public class PlatzVerkaufsWerkzeug
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                _verkaufsFensterWerkzeug.aktiviere();
+                _verkaufsFensterWerkzeug.aktiviere(_derzeitigerPreis);
             }
         });
 
@@ -94,6 +97,7 @@ public class PlatzVerkaufsWerkzeug
                     {
                         reagiereAufNeuePlatzAuswahl(event
                                 .getAusgewaehltePlaetze());
+                        _verkaufsFensterWerkzeug.aktualisierePreis(_derzeitigerPreis);
                     }
                 });
     }
@@ -126,9 +130,9 @@ public class PlatzVerkaufsWerkzeug
     {
         if (istVerkaufenMoeglich(plaetze))
         {
-            int preis = _vorstellung.getPreisFuerPlaetze(plaetze);
+            _derzeitigerPreis = _vorstellung.getPreisFuerPlaetze(plaetze);
             _ui.getPreisLabel().setText(
-                    "Gesamtpreis: " + preis + " Eurocent");
+                    "Gesamtpreis: " + _derzeitigerPreis + " Eurocent");
         }
         else if (istStornierenMoeglich(plaetze))
         {
