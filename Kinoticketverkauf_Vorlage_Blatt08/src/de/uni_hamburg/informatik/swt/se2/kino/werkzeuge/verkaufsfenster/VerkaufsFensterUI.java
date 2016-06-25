@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -47,5 +48,25 @@ public class VerkaufsFensterUI
         _frame.pack();
         
         _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//nur für Testzwecke vorhanden (muss noch raus)
+    }
+
+    public void aktiviere()
+    {
+        _frame.setVisible(true);
+    }
+    
+    public void deaktiviere()
+    {
+        _frame.setVisible(false);
+    }
+
+    public JButton getOKButton()
+    {
+        return _ok;
+    }
+
+    public JButton getAbbrechenButton()
+    {
+        return _abbrechen;
     }
 }

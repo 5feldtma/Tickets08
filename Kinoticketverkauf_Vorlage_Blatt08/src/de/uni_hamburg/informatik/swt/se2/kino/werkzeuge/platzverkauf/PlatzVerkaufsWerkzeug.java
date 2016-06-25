@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Platz;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kinosaal;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.SubwerkzeugObserver;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.verkaufsfenster.VerkaufsFensterWerkzeug;
 
 /**
  * Mit diesem Werkzeug können Plätze verkauft und storniert werden. Es arbeitet
@@ -27,6 +29,8 @@ public class PlatzVerkaufsWerkzeug
     private Vorstellung _vorstellung;
 
     private PlatzVerkaufsWerkzeugUI _ui;
+    
+    private VerkaufsFensterWerkzeug _verkaufsFensterWerkzeug;//Subwerkzeug
 
     /**
      * Initialisiert das PlatzVerkaufsWerkzeug.
@@ -34,6 +38,15 @@ public class PlatzVerkaufsWerkzeug
     public PlatzVerkaufsWerkzeug()
     {
         _ui = new PlatzVerkaufsWerkzeugUI();
+        _verkaufsFensterWerkzeug = new VerkaufsFensterWerkzeug();
+        _verkaufsFensterWerkzeug.registriereBeobachter(new SubwerkzeugObserver()
+        {
+            @Override
+            public void reagiereAufAenderung()
+            {
+                fuehreBarzahlungDurch();
+            }
+        });
         registriereUIAktionen();
         // Am Anfang wird keine Vorstellung angezeigt:
         setVorstellung(null);
@@ -60,7 +73,7 @@ public class PlatzVerkaufsWerkzeug
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                fuehreBarzahlungDurch();
+                _verkaufsFensterWerkzeug.aktiviere();
             }
         });
 
