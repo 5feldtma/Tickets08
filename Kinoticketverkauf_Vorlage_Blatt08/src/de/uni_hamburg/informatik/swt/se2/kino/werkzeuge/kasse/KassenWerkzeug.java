@@ -23,6 +23,7 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.vorstellungsauswaehler.V
  */
 public class KassenWerkzeug
 {
+
     // Das Material dieses Werkzeugs
     private Kino _kino;
 
@@ -100,11 +101,11 @@ public class KassenWerkzeug
 	            @Override
 	            public void reagiereAufAenderung(String arg)
 	            {
-	            	if (arg.equals("Aktualisieren"))
+	            	if (arg.equals(PlatzVerkaufsWerkzeug.AKTION_AKTUALISIEREN))
 	            	{
 	            		aktualisiereBezahlFenster();
 	            	}
-	            	else if(arg.equals("Verkaufen"))
+	            	else if(arg.equals(PlatzVerkaufsWerkzeug.AKTION_VERKAUFEN))
 	            	{
 	            		oeffneBezahlFenster();
 	            	}
@@ -116,11 +117,11 @@ public class KassenWerkzeug
 	            @Override
 	            public void reagiereAufAenderung(String arg)
 	            {
-	            	if (arg.equals("Verkauf"))
+	            	if (arg.equals(BezahlWerkzeug.AKTION_VERKAUF))
 	            	{
 	            		_platzVerkaufsWerkzeug.fuehreBarzahlungDurch();
 	            	}
-	            	else if(arg.equals("Abbruch"))
+	            	else if(arg.equals(BezahlWerkzeug.AKTION_ABBRUCH))
 	            	{
 	            		_platzVerkaufsWerkzeug.aktualisierePlatzplan();
 	            	}

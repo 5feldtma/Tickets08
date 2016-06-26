@@ -24,6 +24,10 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
  */
 public class PlatzVerkaufsWerkzeug extends ObservableSubwerkzeug
 {
+	
+	public static final String AKTION_VERKAUFEN = "Verkaufen";
+	public static final String AKTION_AKTUALISIEREN = "Aktualisieren";
+
     // Die aktuelle Vorstellung, deren Plätze angezeigt werden. Kann null sein.
     private Vorstellung _vorstellung;
 
@@ -63,7 +67,7 @@ public class PlatzVerkaufsWerkzeug extends ObservableSubwerkzeug
             public void actionPerformed(ActionEvent e)
             {
             	//TODO Voll am Ziel vorbei? oder ok?
-                informiereUeberAenderung("Verkaufen");
+                informiereUeberAenderung(AKTION_VERKAUFEN);
             }
         });
 
@@ -130,17 +134,17 @@ public class PlatzVerkaufsWerkzeug extends ObservableSubwerkzeug
         }
         else if (!plaetze.isEmpty())
         {
-        	_preis = -1;
+        	_preis = 0;
             _ui.getPreisLabel().setText(
                     "Verkauf und Storno nicht gleichzeitig möglich!");
         }
         else
         {
-        	_preis = -1;
+        	_preis = 0;
             _ui.getPreisLabel().setText(
                     "Gesamtpreis: 0 Eurocent"); 
         }
-        informiereUeberAenderung("Aktualisieren");
+        informiereUeberAenderung(AKTION_AKTUALISIEREN);
     }
 
     /**
