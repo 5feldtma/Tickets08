@@ -14,6 +14,9 @@ public class NumPad extends JPanel {
 		private ActionHandler actionHandler;
         private String[] buttonLabels = {"1","2","3","4","5","6","7","8","9",",","0","<--"};
 
+        /**
+         * Initialisiert ein neues Numpad.
+         */
         public NumPad() {
             setLayout(new GridLayout(4, 3));
             actionHandler = new ActionHandler();
@@ -23,7 +26,11 @@ public class NumPad extends JPanel {
             }
         }
 
-        //macht neue Buttons direkt inklusive Actionlistener
+        /**
+         * Erstellt die NumPad Buttons mit entsprechender Beschriftung.
+         * @param index
+         * @return ein unfokussierbarer, beschrifteter Button mit Actionlistener
+         */
         protected JButton createButton(int index) {
             JButton btn = new JButton(buttonLabels[index]);
             //Buttons unfocusable damit man immer in der Preiseingabe bleibt
@@ -31,7 +38,10 @@ public class NumPad extends JPanel {
             btn.addActionListener(actionHandler);
             return btn;
         }
-
+        
+        /**
+         * Erzeugt Input im Textfeld durch die gedrückten Buttons.
+         */
         public class ActionHandler implements ActionListener {
 
             @Override
@@ -41,27 +51,49 @@ public class NumPad extends JPanel {
                     JButton btn = (JButton) source;
                     //sucht sich das "einzige Textfeld", bzw. das "Standardtextfeld" des Fensters
                     JTextField tf = (JTextField) KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-
+                    	
+	                    String currentText = tf.getText().trim();
+                    	String newText = "";
                     	String label = btn.getText().trim();
-                    	if (label == ",")
+                    	
+                    	if (label == "<--") //rücktaste
                     	{
-                    		tf.setText(tf.getText() + ',');
+                    			newText = removeLastChar(currentText);
+                    			tf.setText(newText);
+                    			return;
                     	}
-                    	else if (label == "<--") //rücktaste
+                    	
+                    	if(currentText.length() < 8)
                     	{
+                    		if (label == ",") //komma gedrückt
                     		{
-                    			String currentText = tf.getText().trim();
-                    			String shortenedText = currentText.substring(0, Math.max(0, currentText.length()-1));
-                    			tf.setText(shortenedText);
+                    		newText = currentText + ',';
                     		}
+                    		else //Zahl gedrückt
+                    		{
+                    			int value = Integer.parseInt(label);
+                    			newText = currentText + value;
+                    		}
+                    		tf.setText(newText);
+                    		return;
                     	}
-                    	else
-                    	{
-                    		int value = Integer.parseInt(label);
-                    		tf.setText(tf.getText() + value);
-                    	}
+                    	
                 }  
             }
 
+        }
+        
+		
+		/**
+		 * Entfernt den letzten Char eines Strings.
+		 * @param s der zu kürzende String
+		 * 
+		 * @return Ein String, dessen letzter Char entfernt wurde. Mindestens ein leerer String.
+		 */
+        private String removeLastChar(String s) {
+        	if (s == null || s.length() == 0) {
+		        return "";
+		    }
+		    return s.substring(0, s.length()-1);
         }
 }
