@@ -2,12 +2,9 @@ package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahlvorgang;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
-import java.util.Locale;
 
-import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -22,6 +19,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug {
 	private BezahlWerkzeugUI _ui;
 	private int _centPreis;
 	private String _lastInput = "";
+
 
 	/**
 	 * Initialisiert das PlatzVerkaufsWerkzeug.
@@ -55,7 +53,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_ui.hideDialog();
-				_ui.getEingabeFeld().setText("");
+				_ui.setEingabefeld("");
 				informiereUeberAenderung(AKTION_VERKAUF);
 			}
 		});
@@ -64,6 +62,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_ui.hideDialog();
+				_ui.setEingabefeld("");
 				informiereUeberAenderung(AKTION_ABBRUCH);
 			}
 		});

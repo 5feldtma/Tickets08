@@ -176,6 +176,13 @@ public class BezahlWerkzeugUI {
     }
     
     /**
+     * Schreibt den gegebenen Text ins Eingabefeld.
+     */
+    public void setEingabefeld(String text)
+    {
+    	_eingabeFeld.setText(text);
+    }
+    /**
      * Setzt das Preislabel neu mit gegebenem Text.
      * @param text der zu setzende Text
      */
