@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+//import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -51,6 +51,7 @@ public class VerkaufsFensterUI
 
     }
 
+    /*
     public void fehlermeldung()
     {
         final JDialog dialog = new JDialog(_frame, "Fehler");
@@ -61,6 +62,7 @@ public class VerkaufsFensterUI
         dialog.setLocationRelativeTo(_frame);
         dialog.setVisible(true);
     }
+    **/
 
     public void aktiviere()
     {

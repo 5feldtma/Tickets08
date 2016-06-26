@@ -77,7 +77,8 @@ public class PlatzVerkaufsWerkzeug
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                _verkaufsFensterWerkzeug.aktiviere(_derzeitigerPreis);
+                _verkaufsFensterWerkzeug.aktiviere();
+                _verkaufsFensterWerkzeug.aktualisierePreis(_derzeitigerPreis);
             }
         });
 

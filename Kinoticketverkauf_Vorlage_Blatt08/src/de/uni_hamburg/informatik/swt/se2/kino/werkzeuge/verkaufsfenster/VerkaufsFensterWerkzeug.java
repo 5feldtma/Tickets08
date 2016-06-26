@@ -17,9 +17,8 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
         registriereUIAktionen();
     }
 
-    public void aktiviere(int preis)
+    public void aktiviere()
     {
-        aktualisierePreis(preis);
         blockOKButton();
         _ui.aktiviere();
     }
@@ -67,6 +66,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
         aktualisiereErhaltenenBetrag();
     }
 
+    /*
     private void beendeTransaktion()
     {
         if (_verkaufsFensterService.istBetragAkzeptabel())
@@ -79,7 +79,8 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
             _ui.fehlermeldung();
         }
     }
-
+    **/
+    
     private void registriereUIAktionen()
     {
         _ui.getOKButton()
@@ -88,7 +89,9 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    beendeTransaktion();
+                    //beendeTransaktion();
+                    informiereUeberAenderung();
+                    deaktiviere();
                 }
             });
 
