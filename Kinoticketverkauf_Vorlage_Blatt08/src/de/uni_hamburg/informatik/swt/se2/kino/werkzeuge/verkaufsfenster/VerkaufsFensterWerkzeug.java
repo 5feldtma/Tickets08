@@ -41,14 +41,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
     
     private void blockOKButton()
     {
-        if (_verkaufsFensterService.istBetragAkzeptabel())
-        {
-            _ui.getOKButton().setEnabled(true);
-        }
-        else
-        {
-            _ui.getOKButton().setEnabled(false);
-        }
+        _ui.getOKButton().setEnabled(_verkaufsFensterService.istBetragAkzeptabel());
     }
     
     private void aktualisiereRueckgeld()
