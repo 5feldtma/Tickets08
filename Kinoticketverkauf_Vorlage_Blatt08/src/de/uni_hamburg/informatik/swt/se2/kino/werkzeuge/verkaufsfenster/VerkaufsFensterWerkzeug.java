@@ -20,6 +20,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
     public void aktiviere()
     {
         _ui.aktiviere();
+        _verkaufsFensterService.reset();
     }
 
     public void aktualisierePreis(int preis)

@@ -48,6 +48,7 @@ public class VerkaufsFensterUI
         _frame.pack();
         _frame.setLocation(1200, 500);
         _frame.setAlwaysOnTop(true);
+        _frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     }
 
@@ -64,43 +65,70 @@ public class VerkaufsFensterUI
     }
     **/
 
+    /**
+     * Aktiviert das Frame.
+     */
     public void aktiviere()
     {
         _frame.setVisible(true);
     }
 
+    /**
+     * Setzt das Preis-Label.
+     */
     public void setPreis(String preis)
     {
         _preis.setText(preis);
     }
 
+    /**
+     * Setzt das ErhaltenenBetrag-Label.
+     */
     public void setErhaltenenBetrag(String erhaltenerBetrag)
     {
         _erhaltenerBetrag.setText(erhaltenerBetrag);
     }
 
+    /**
+     * Setzt das Rueckgeld-Label.
+     */
     public void setRueckgeld(String rueckgeld)
     {
         _rueckgeld.setText(rueckgeld);
     }
 
+    /**
+     * Deaktiviert das Frame.
+     */
     public void deaktiviere()
     {
         _frame.setVisible(false);
     }
-
+    
+    /**
+     * Gibt den OK-Button zurück.
+     */
     public JButton getOKButton()
     {
         return _ok;
     }
-
+    
+    /**
+     * Gibt den Abbrechen-Button zurück.
+     */
     public JButton getAbbrechenButton()
     {
         return _abbrechen;
     }
 
+    /**
+     * Gibt die Ziffern-Buttons zurück. Beinhaltet auch den Reset- und Löschen-Button.
+     * 
+     * @require index >= 0 && index <= 12
+     */
     public JButton getZiffernButton(int index)
     {
+        assert index >= 0 && index <= 12 : "Vorbedingung verletzt: Erhaltener Index verweist auf keinen Button.";
         return _tastatur.getButton(index);
     }
     
