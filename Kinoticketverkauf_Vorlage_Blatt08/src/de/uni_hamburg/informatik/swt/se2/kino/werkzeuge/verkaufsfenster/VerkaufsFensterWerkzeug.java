@@ -19,7 +19,6 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
 
     public void aktiviere()
     {
-        blockOKButton();
         _ui.aktiviere();
     }
 
@@ -33,7 +32,6 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
     private void aktualisiereErhaltenenBetrag()
     {
         aktualisiereRueckgeld();
-        blockOKButton();
         _ui.setErhaltenenBetrag(
                 _verkaufsFensterService.getErhaltenerBetrag() + " Eurocent");
     }
@@ -57,6 +55,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                     + -1 * _verkaufsFensterService.berechneRueckgeld()
                     + " Eurocent");
         }
+        blockOKButton();
     }
 
     private void deaktiviere()
