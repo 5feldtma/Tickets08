@@ -99,8 +99,16 @@ public class VerkaufsFensterUI
         return _abbrechen;
     }
 
-    public JButton getZahlenButton(int index)
+    public JButton getZiffernButton(int index)
     {
         return _tastatur.getButton(index);
+    }
+    
+    /**
+     * Schließt das Fenster.
+     */
+    public void schliesseFenster()
+    {
+        _frame.dispose();
     }
 }

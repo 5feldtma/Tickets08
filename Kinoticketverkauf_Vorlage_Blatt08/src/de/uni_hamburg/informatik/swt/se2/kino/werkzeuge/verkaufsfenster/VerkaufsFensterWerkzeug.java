@@ -28,6 +28,14 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
         _verkaufsFensterService.setPreis(preis);
         aktualisiereRueckgeld();
     }
+    
+    /**
+     * Beendet die Anwendung.
+     */
+    public void reagiereAufBeendenButton()
+    {
+        _ui.schliesseFenster();
+    }
 
     private void aktualisiereErhaltenenBetrag()
     {
@@ -104,7 +112,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(0)
+        _ui.getZiffernButton(0)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -116,7 +124,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(1)
+        _ui.getZiffernButton(1)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -127,7 +135,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(2)
+        _ui.getZiffernButton(2)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -138,7 +146,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(3)
+        _ui.getZiffernButton(3)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -149,7 +157,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(4)
+        _ui.getZiffernButton(4)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -160,7 +168,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(5)
+        _ui.getZiffernButton(5)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -171,7 +179,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(6)
+        _ui.getZiffernButton(6)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -182,7 +190,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(7)
+        _ui.getZiffernButton(7)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -193,7 +201,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(8)
+        _ui.getZiffernButton(8)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -204,7 +212,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(9)
+        _ui.getZiffernButton(9)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -215,7 +223,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(10)
+        _ui.getZiffernButton(10)
             .addActionListener(new ActionListener()
             {
                 @Override
@@ -226,7 +234,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
                 }
             });
 
-        _ui.getZahlenButton(11)
+        _ui.getZiffernButton(11)
             .addActionListener(new ActionListener()
             {
                 @Override

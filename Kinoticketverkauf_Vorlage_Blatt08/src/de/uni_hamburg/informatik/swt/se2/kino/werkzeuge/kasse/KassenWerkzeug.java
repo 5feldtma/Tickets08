@@ -129,6 +129,7 @@ public class KassenWerkzeug
     private void reagiereAufBeendenButton()
     {
         _ui.schliesseFenster();
+        _platzVerkaufsWerkzeug.reagiereAufBeendenButton();
     }
 
     /**

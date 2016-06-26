@@ -181,6 +181,14 @@ public class PlatzVerkaufsWerkzeug
         aktualisierePlatzplan();
         _verkaufsFensterWerkzeug.aktualisierePreis(0);
     }
+    
+    /**
+     * Beendet die Anwendung.
+     */
+    public void reagiereAufBeendenButton()
+    {
+        _verkaufsFensterWerkzeug.reagiereAufBeendenButton();
+    }
 
     /**
      * Aktualisiert den Platzplan basierend auf der ausgwählten Vorstellung.
