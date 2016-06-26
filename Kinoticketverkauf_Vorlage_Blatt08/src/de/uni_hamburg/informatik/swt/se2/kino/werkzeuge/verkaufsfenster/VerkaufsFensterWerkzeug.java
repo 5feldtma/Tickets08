@@ -17,14 +17,26 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
         registriereUIAktionen();
     }
 
+    /**
+     * Aktiviert das Verkaufsfenster.
+     */
     public void aktiviere()
     {
         _ui.aktiviere();
         _verkaufsFensterService.reset();
     }
 
+    /**
+     * Aktualisiert den Preis, der gezahlt werden soll.
+     * 
+     * @param preis Der zu zahlende Preis
+     * 
+     * @require preis >= 0
+     */
     public void aktualisierePreis(int preis)
     {
+        assert preis >= 0 : "Vorbedingung verletzt: Der Preis muss positiv sein";
+        
         _ui.setPreis("Preis: " + preis + " Eurocent");
         _verkaufsFensterService.setPreis(preis);
         aktualisiereRueckgeld();

@@ -34,13 +34,9 @@ public class VerkaufsFensterService
      * Setzt den Preis fest.
      * 
      * @param betrag Der zu zahlende Preis
-     * 
-     * @require betrag >= 0
      */
     public void setPreis(int betrag)
     {
-        assert betrag >= 0 : "Vorbedingung verletzt: Der Preis muss positiv sein";
-        
         _preis = betrag;
     }
     
