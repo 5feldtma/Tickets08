@@ -80,6 +80,11 @@ public class VerkaufsFensterUI
     {
         _rueckgeld.setText("Rueckgeld: " + rueckgeld + " Eurocent");
     }
+    
+    public void aktualisiereRestbetrag(int restbetrag)
+    {
+        _rueckgeld.setText("Restbetrag: " + restbetrag + " Eurocent");
+    }
 
     public void deaktiviere()
     {
