@@ -9,7 +9,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
 {
     private VerkaufsFensterUI _ui;
     private VerkaufsFensterService _verkaufsFensterService;
-    
+
     public VerkaufsFensterWerkzeug()
     {
         _ui = new VerkaufsFensterUI();
@@ -20,44 +20,63 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
     public void aktiviere(int preis)
     {
         aktualisierePreis(preis);
+        blockOKButton();
         _ui.aktiviere();
     }
-    
+
     public void aktualisierePreis(int preis)
     {
         _ui.setPreis("Preis: " + preis + " Eurocent");
         _verkaufsFensterService.setPreis(preis);
         aktualisiereRueckgeld();
     }
-    
+
     private void aktualisiereErhaltenenBetrag()
     {
         aktualisiereRueckgeld();
-        _ui.setErhaltenenBetrag(_verkaufsFensterService.getErhaltenerBetrag() + " Eurocent");
+        blockOKButton();
+        _ui.setErhaltenenBetrag(
+                _verkaufsFensterService.getErhaltenerBetrag() + " Eurocent");
+    }
+    
+    private void blockOKButton()
+    {
+        if (_verkaufsFensterService.istBetragAkzeptabel())
+        {
+            _ui.getOKButton().setEnabled(true);
+        }
+        else
+        {
+            _ui.getOKButton().setEnabled(false);
+        }
     }
     
     private void aktualisiereRueckgeld()
     {
-        if(_verkaufsFensterService.istBetragAkzeptabel())
+        if (_verkaufsFensterService.istBetragAkzeptabel())
         {
-            _ui.setRueckgeld("Rueckgeld: " + _verkaufsFensterService.berechneRueckgeld() + " Eurocent");
+            _ui.setRueckgeld(
+                    "Rueckgeld: " + _verkaufsFensterService.berechneRueckgeld()
+                            + " Eurocent");
         }
         else
         {
-            _ui.setRueckgeld("Restbetrag: " + -1*_verkaufsFensterService.berechneRueckgeld() + " Eurocent");
+            _ui.setRueckgeld("Restbetrag: "
+                    + -1 * _verkaufsFensterService.berechneRueckgeld()
+                    + " Eurocent");
         }
     }
-    
+
     private void deaktiviere()
     {
         _ui.deaktiviere();
         _verkaufsFensterService.reset();
         aktualisiereErhaltenenBetrag();
     }
-    
+
     private void beendeTransaktion()
     {
-        if(_verkaufsFensterService.istBetragAkzeptabel())
+        if (_verkaufsFensterService.istBetragAkzeptabel())
         {
             informiereUeberAenderung();
             deaktiviere();
@@ -67,147 +86,161 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
             _ui.fehlermeldung();
         }
     }
-    
+
     private void registriereUIAktionen()
     {
-        _ui.getOKButton().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getOKButton()
+            .addActionListener(new ActionListener()
             {
-                beendeTransaktion();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    beendeTransaktion();
+                }
+            });
 
-        _ui.getAbbrechenButton().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getAbbrechenButton()
+            .addActionListener(new ActionListener()
             {
-                deaktiviere();
-            }
-        });
-        
-        _ui.getZahlenButton(0).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                _verkaufsFensterService.add(7);
-                aktualisiereErhaltenenBetrag();
-                
-            }
-        });
-        
-        _ui.getZahlenButton(1).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                _verkaufsFensterService.add(8);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    deaktiviere();
+                }
+            });
 
-        _ui.getZahlenButton(2).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(0)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.add(9);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(7);
+                    aktualisiereErhaltenenBetrag();
 
-        _ui.getZahlenButton(3).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                _verkaufsFensterService.add(4);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                }
+            });
 
-        _ui.getZahlenButton(4).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(1)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.add(5);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(8);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
 
-        _ui.getZahlenButton(5).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(2)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.add(6);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(9);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
 
-        _ui.getZahlenButton(6).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(3)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.add(1);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(4);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
 
-        _ui.getZahlenButton(7).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(4)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.add(2);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(5);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
 
-        _ui.getZahlenButton(8).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(5)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.add(3);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(6);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
 
-        _ui.getZahlenButton(9).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(6)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.reset();
-                aktualisiereErhaltenenBetrag();    //Reset
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(1);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
 
-        _ui.getZahlenButton(10).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(7)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.add(0);
-                aktualisiereErhaltenenBetrag();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(2);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
 
-        _ui.getZahlenButton(11).addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getZahlenButton(8)
+            .addActionListener(new ActionListener()
             {
-                _verkaufsFensterService.loeschen();
-                aktualisiereErhaltenenBetrag();     //Löschen
-            }
-        });
-        
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(3);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
+
+        _ui.getZahlenButton(9)
+            .addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.reset();
+                    aktualisiereErhaltenenBetrag(); //Reset
+                }
+            });
+
+        _ui.getZahlenButton(10)
+            .addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.add(0);
+                    aktualisiereErhaltenenBetrag();
+                }
+            });
+
+        _ui.getZahlenButton(11)
+            .addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    _verkaufsFensterService.loeschen();
+                    aktualisiereErhaltenenBetrag(); //Löschen
+                }
+            });
+
     }
 }

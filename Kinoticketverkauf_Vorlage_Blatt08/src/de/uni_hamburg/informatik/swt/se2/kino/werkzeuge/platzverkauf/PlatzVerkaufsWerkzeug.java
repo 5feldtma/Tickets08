@@ -50,6 +50,7 @@ public class PlatzVerkaufsWerkzeug
                 fuehreBarzahlungDurch();
             }
         });
+        
         registriereUIAktionen();
         // Am Anfang wird keine Vorstellung angezeigt:
         setVorstellung(null);
@@ -177,6 +178,7 @@ public class PlatzVerkaufsWerkzeug
     {
         _vorstellung = vorstellung;
         aktualisierePlatzplan();
+        _verkaufsFensterWerkzeug.aktualisierePreis(0);
     }
 
     /**
