@@ -46,6 +46,7 @@ public class VerkaufsFensterUI
         _frame.add(_tastatur);
 
         _frame.pack();
+        _frame.setLocation(1200, 500);
         _frame.setAlwaysOnTop(true);
 
     }
