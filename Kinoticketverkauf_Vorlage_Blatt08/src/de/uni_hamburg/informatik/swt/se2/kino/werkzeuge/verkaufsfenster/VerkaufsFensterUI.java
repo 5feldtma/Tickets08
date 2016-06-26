@@ -52,7 +52,7 @@ public class VerkaufsFensterUI
 
     public void fehlermeldung()
     {
-        final JDialog dialog = new JDialog(_frame, "ModalDialog");
+        final JDialog dialog = new JDialog(_frame, "Fehler");
         dialog.setModal(true);
         dialog.add(new JLabel("MEHR GELD!"));
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -66,24 +66,19 @@ public class VerkaufsFensterUI
         _frame.setVisible(true);
     }
 
-    public void aktualisierePreis(int preis)
+    public void setPreis(String preis)
     {
-        _preis.setText("Preis: " + preis + " Eurocent");
+        _preis.setText(preis);
     }
 
-    public void aktualisiereErhaltenenBetrag(int erhaltenerBetrag)
+    public void setErhaltenenBetrag(String erhaltenerBetrag)
     {
-        _erhaltenerBetrag.setText("" + erhaltenerBetrag + " Eurocent");
+        _erhaltenerBetrag.setText(erhaltenerBetrag);
     }
 
-    public void aktualisiereRueckgeld(int rueckgeld)
+    public void setRueckgeld(String rueckgeld)
     {
-        _rueckgeld.setText("Rueckgeld: " + rueckgeld + " Eurocent");
-    }
-    
-    public void aktualisiereRestbetrag(int restbetrag)
-    {
-        _rueckgeld.setText("Restbetrag: " + restbetrag + " Eurocent");
+        _rueckgeld.setText(rueckgeld);
     }
 
     public void deaktiviere()

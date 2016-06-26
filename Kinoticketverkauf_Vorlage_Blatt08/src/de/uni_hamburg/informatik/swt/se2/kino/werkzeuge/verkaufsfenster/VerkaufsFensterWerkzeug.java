@@ -25,7 +25,7 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
     
     public void aktualisierePreis(int preis)
     {
-        _ui.aktualisierePreis(preis);
+        _ui.setPreis("Preis: " + preis + " Eurocent");
         _verkaufsFensterService.setPreis(preis);
         aktualisiereRueckgeld();
     }
@@ -33,18 +33,18 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
     private void aktualisiereErhaltenenBetrag()
     {
         aktualisiereRueckgeld();
-        _ui.aktualisiereErhaltenenBetrag(_verkaufsFensterService.getErhaltenerBetrag());
+        _ui.setErhaltenenBetrag(_verkaufsFensterService.getErhaltenerBetrag() + " Eurocent");
     }
     
     private void aktualisiereRueckgeld()
     {
         if(_verkaufsFensterService.istBetragAkzeptabel())
         {
-            _ui.aktualisiereRueckgeld(_verkaufsFensterService.berechneRueckgeld());
+            _ui.setRueckgeld("Rueckgeld: " + _verkaufsFensterService.berechneRueckgeld() + " Eurocent");
         }
         else
         {
-            _ui.aktualisiereRestbetrag(-1*_verkaufsFensterService.berechneRueckgeld());
+            _ui.setRueckgeld("Restbetrag: " + -1*_verkaufsFensterService.berechneRueckgeld() + " Eurocent");
         }
     }
     
