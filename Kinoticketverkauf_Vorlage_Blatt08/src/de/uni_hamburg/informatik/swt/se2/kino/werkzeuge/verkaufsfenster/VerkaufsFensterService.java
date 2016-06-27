@@ -61,7 +61,10 @@ public class VerkaufsFensterService
     {
         assert betrag <= 9 && betrag >= 0 : "Vorbedingung verletzt: betrag ist keine Ziffer";
         
-        _erhaltenerBetrag = _erhaltenerBetrag*10 + betrag;
+        if(_erhaltenerBetrag<1000000)
+        {
+            _erhaltenerBetrag = _erhaltenerBetrag*10 + betrag;
+        }
     }
     
     /**
