@@ -238,7 +238,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
         {
             anzeigeWert = "Kein korrekter Betrag.";
         }
-        else if (differenz > 0)
+        else if (differenz > 0 && inputZuCent() > 1000000)
         {
             anzeigeWert = "Es fehlen noch: " + displayFormat(differenz) + ".";
         }
