@@ -51,7 +51,7 @@ public class VerkaufsFensterService
     }
     
     /**
-     * Hängt die ausgewählte Ziffer an _erhaltenenBetrag an.
+     * Hängt die ausgewählte Ziffer an _erhaltenenBetrag an. Der erhaltene Betrag kann nicht über 1 Millionen Einheiten (Eurocent) steigen.
      * 
      * @param betrag eine Ziffer (0-9)
      * 
