@@ -34,13 +34,13 @@ public class KassenWerkzeug
     private PlatzVerkaufsWerkzeug _platzVerkaufsWerkzeug;
     private DatumAuswaehlWerkzeug _datumAuswaehlWerkzeug;
     private VorstellungsAuswaehlWerkzeug _vorstellungAuswaehlWerkzeug;
-	private BezahlWerkzeug _bezahlWerkzeug;
-	
+    private BezahlWerkzeug _bezahlWerkzeug;
 
     /**
      * Initialisiert das Kassenwerkzeug.
      * 
-     * @param kino das Kino, mit dem das Werkzeug arbeitet.
+     * @param kino
+     *            das Kino, mit dem das Werkzeug arbeitet.
      * 
      * @require kino != null
      */
@@ -62,7 +62,6 @@ public class KassenWerkzeug
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
                 _datumAuswaehlWerkzeug.getUIPanel(),
                 _vorstellungAuswaehlWerkzeug.getUIPanel());
-        
 
         registriereUIAktionen();
         setzeTagesplanFuerAusgewaehltesDatum();
@@ -86,62 +85,61 @@ public class KassenWerkzeug
         });
 
         _vorstellungAuswaehlWerkzeug
-                .registriereBeobachter(new SubwerkzeugObserver()
+            .registriereBeobachter(new SubwerkzeugObserver()
+            {
+                @Override
+                public void reagiereAufAenderung(String arg)
                 {
-                    @Override
-                    public void reagiereAufAenderung(String arg)
-                    {
-                        setzeAusgewaehlteVorstellung();
-                    }
-                });
-        
-        _platzVerkaufsWerkzeug
-	        .registriereBeobachter(new SubwerkzeugObserver()
-	        {
-	            @Override
-	            public void reagiereAufAenderung(String arg)
-	            {
-	            	if (arg.equals(PlatzVerkaufsWerkzeug.AKTION_AKTUALISIEREN))
-	            	{
-	            		aktualisiereBezahlFenster();
-	            	}
-	            	else if(arg.equals(PlatzVerkaufsWerkzeug.AKTION_VERKAUFEN))
-	            	{
-	            		oeffneBezahlFenster();
-	            	}
-	            }
-	        });
-        _bezahlWerkzeug
-	        .registriereBeobachter(new SubwerkzeugObserver()
-	        {
-	            @Override
-	            public void reagiereAufAenderung(String arg)
-	            {
-	            	if (arg.equals(BezahlWerkzeug.AKTION_VERKAUF))
-	            	{
-	            		_platzVerkaufsWerkzeug.fuehreBarzahlungDurch();
-	            	}
-	            	else if(arg.equals(BezahlWerkzeug.AKTION_ABBRUCH))
-	            	{
-	            		_platzVerkaufsWerkzeug.aktualisierePlatzplan();
-	            	}
-	            }
-	        });
+                    setzeAusgewaehlteVorstellung();
+                }
+            });
+
+        _platzVerkaufsWerkzeug.registriereBeobachter(new SubwerkzeugObserver()
+        {
+            @Override
+            public void reagiereAufAenderung(String arg)
+            {
+                if (arg.equals(PlatzVerkaufsWerkzeug.AKTION_AKTUALISIEREN))
+                {
+                    aktualisiereBezahlFenster();
+                }
+                else if (arg.equals(PlatzVerkaufsWerkzeug.AKTION_VERKAUFEN))
+                {
+                    oeffneBezahlFenster();
+                }
+            }
+        });
+        _bezahlWerkzeug.registriereBeobachter(new SubwerkzeugObserver()
+        {
+            @Override
+            public void reagiereAufAenderung(String arg)
+            {
+                if (arg.equals(BezahlWerkzeug.AKTION_VERKAUF))
+                {
+                    _platzVerkaufsWerkzeug.fuehreBarzahlungDurch();
+                }
+                else if (arg.equals(BezahlWerkzeug.AKTION_ABBRUCH))
+                {
+                    _platzVerkaufsWerkzeug.aktualisierePlatzplan();
+                }
+            }
+        });
     }
-    
+
     /**
      * Fügt die Funktionalitat zum Beenden-Button hinzu.
      */
     private void registriereUIAktionen()
     {
-        _ui.getBeendenButton().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getBeendenButton()
+            .addActionListener(new ActionListener()
             {
-                reagiereAufBeendenButton();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    reagiereAufBeendenButton();
+                }
+            });
     }
 
     /**
@@ -161,23 +159,22 @@ public class KassenWerkzeug
     {
         _platzVerkaufsWerkzeug.setVorstellung(getAusgewaehlteVorstellung());
     }
-    
+
     /**
      * Aktualisiert das Bezahlfenster.
      */
     private void aktualisiereBezahlFenster()
     {
-    	_bezahlWerkzeug.aktualisierePreis(getAktuellenPreis());
+        _bezahlWerkzeug.aktualisierePreis(getAktuellenPreis());
     }
-    
+
     /**
      * Öffnet das Bezahlfenster
      */
     private void oeffneBezahlFenster()
     {
-    	_bezahlWerkzeug.showDialog();
+        _bezahlWerkzeug.showDialog();
     }
-    
 
     /**
      * Beendet die Anwendung.
@@ -187,10 +184,10 @@ public class KassenWerkzeug
         _ui.schliesseFenster();
         _bezahlWerkzeug.closeDialog();
     }
-    
+
     private int getAktuellenPreis()
     {
-    	return _platzVerkaufsWerkzeug.getAktuellenPreis();
+        return _platzVerkaufsWerkzeug.getAktuellenPreis();
     }
 
     /**
