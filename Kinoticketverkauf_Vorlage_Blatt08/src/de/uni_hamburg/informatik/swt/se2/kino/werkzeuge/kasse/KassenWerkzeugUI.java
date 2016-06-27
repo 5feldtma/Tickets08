@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -39,20 +40,28 @@ class KassenWerkzeugUI
      * die eingebettet werden.
      */
     public KassenWerkzeugUI(JPanel platzVerkaufsPanel,
-            JPanel datumAuswaehlPanel, JPanel vorstellungAuswaehlPanel)
+            JPanel datumAuswaehlPanel, JPanel vorstellungAuswaehlPanel, JPanel bezahlWerkzeugPanel)
     {
         _frame = new JFrame(TITEL);
         _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         _frame.getContentPane().setLayout(new BorderLayout());
 
         JComponent topPanel = erstelleUeberschriftPanel();
-        JComponent leftPanel = erstelleVorstellungsauswahlPanel(
+        JComponent leftTopPanel = erstelleVorstellungsauswahlPanel(
                 datumAuswaehlPanel, vorstellungAuswaehlPanel);
+        JComponent leftBottomPanel = bezahlWerkzeugPanel;
         JComponent rightPanel = platzVerkaufsPanel;
         JComponent bottomPanel = erstelleBeendenPanel();
-
+        
+        JComponent leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
+        leftPanel.add(leftTopPanel);
+        leftPanel.add(leftBottomPanel);
+        
+        
         JSplitPane splitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                 leftPanel, rightPanel);
+        
         _frame.getContentPane().add(splitter, BorderLayout.CENTER);
         _frame.getContentPane().add(topPanel, BorderLayout.NORTH);
         _frame.getContentPane().add(bottomPanel, BorderLayout.SOUTH);

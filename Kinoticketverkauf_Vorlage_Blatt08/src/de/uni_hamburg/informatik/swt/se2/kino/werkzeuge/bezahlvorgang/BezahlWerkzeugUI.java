@@ -16,7 +16,7 @@ public class BezahlWerkzeugUI
 
     public static final int MAX_EINGABELAENGE = 8;
 
-    private JDialog _dialog;
+    private JPanel _dialog;
     private JButton _bestaetigenButton;
     private JButton _abbrechenButton;
     private JTextField _eingabeFeld;
@@ -32,9 +32,9 @@ public class BezahlWerkzeugUI
      * Erzeugt das Panel, in dem der Kinosaal mit den Sitzplätzen dargestellt
      * wird.
      */
-    private JDialog erstelleDialog()
+    private JPanel erstelleDialog()
     {
-        JDialog dialog = new JDialog();
+        JPanel dialog = new JPanel();
         dialog.setLayout(new BorderLayout());
 
         JPanel linkesPanel = new JPanel(new BorderLayout());
@@ -102,8 +102,7 @@ public class BezahlWerkzeugUI
      */
     public void showDialog()
     {
-        _dialog.setSize(400, 200);
-        _dialog.setLocation(1200, 500);
+        
         _dialog.setVisible(true);
     }
 
@@ -112,7 +111,7 @@ public class BezahlWerkzeugUI
      */
     public void hideDialog()
     {
-        _dialog.setVisible(false);
+        
     }
 
     /**
@@ -120,12 +119,12 @@ public class BezahlWerkzeugUI
      */
     public void closeDialog()
     {
-        _dialog.dispose();
+        
     }
 
     private JPanel erstelleTastatur()
     {
-        return new NumPad();
+        return new NumPad(_eingabeFeld);
     }
 
     /**
@@ -193,5 +192,17 @@ public class BezahlWerkzeugUI
     {
         _rueckgeldLabel.setText(rueckgeld);
     }
+    
+    /**
+     * Gibt das Panel dieses Subwerkzeugs zurück. Das Panel sollte von einem
+     * Kontextwerkzeug eingebettet werden.
+     * 
+     * @ensure result != null
+     */
+    public JPanel getUIPanel()
+    {
+        return _dialog;
+    }
+
 
 }

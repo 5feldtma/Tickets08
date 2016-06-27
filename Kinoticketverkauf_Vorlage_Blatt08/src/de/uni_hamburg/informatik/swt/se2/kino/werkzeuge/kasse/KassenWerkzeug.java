@@ -61,7 +61,7 @@ public class KassenWerkzeug
         // UI erstellen (mit eingebetteten UIs der direkten Subwerkzeuge)
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
                 _datumAuswaehlWerkzeug.getUIPanel(),
-                _vorstellungAuswaehlWerkzeug.getUIPanel());
+                _vorstellungAuswaehlWerkzeug.getUIPanel(), _bezahlWerkzeug.getUIPanel());
 
         registriereUIAktionen();
         setzeTagesplanFuerAusgewaehltesDatum();

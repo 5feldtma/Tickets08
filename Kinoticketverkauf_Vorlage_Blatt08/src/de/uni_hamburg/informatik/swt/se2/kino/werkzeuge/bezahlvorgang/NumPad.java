@@ -15,11 +15,12 @@ public class NumPad extends JPanel
     private ActionHandler actionHandler;
     private String[] buttonLabels = {"1", "2", "3", "4", "5", "6", "7", "8",
             "9", ",", "0", "<--"};
+    private JTextField _eingabefeld;
 
     /**
      * Initialisiert ein neues Numpad.
      */
-    public NumPad()
+    public NumPad(JTextField eingabefeld)
     {
         setLayout(new GridLayout(4, 3));
         actionHandler = new ActionHandler();
@@ -28,6 +29,7 @@ public class NumPad extends JPanel
         {
             add(createButton(index));
         }
+        _eingabefeld = eingabefeld;
     }
 
     /**
@@ -41,6 +43,7 @@ public class NumPad extends JPanel
         //Buttons unfocusable damit man immer in der Preiseingabe bleibt
         btn.setFocusable(false);
         btn.addActionListener(actionHandler);
+        btn.setSize(50, 50);
         return btn;
     }
 
@@ -58,9 +61,7 @@ public class NumPad extends JPanel
             {
                 JButton btn = (JButton) source;
                 //sucht sich das "einzige Textfeld", bzw. das "Standardtextfeld" des Fensters
-                JTextField tf = (JTextField) KeyboardFocusManager
-                    .getCurrentKeyboardFocusManager()
-                    .getFocusOwner();
+                JTextField tf = _eingabefeld;
 
                 String currentText = tf.getText()
                     .trim();

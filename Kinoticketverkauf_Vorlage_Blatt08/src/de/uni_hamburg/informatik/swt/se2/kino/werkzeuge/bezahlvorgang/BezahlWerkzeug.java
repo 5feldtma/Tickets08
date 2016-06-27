@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
+import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -44,6 +45,17 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     public void closeDialog()
     {
         _ui.closeDialog();
+    }
+    
+    /**
+     * Gibt das Panel dieses Subwerkzeugs zurück. Das Panel sollte von einem
+     * Kontextwerkzeug eingebettet werden.
+     * 
+     * @ensure result != null
+     */
+    public JPanel getUIPanel()
+    {
+        return _ui.getUIPanel();
     }
 
     /**

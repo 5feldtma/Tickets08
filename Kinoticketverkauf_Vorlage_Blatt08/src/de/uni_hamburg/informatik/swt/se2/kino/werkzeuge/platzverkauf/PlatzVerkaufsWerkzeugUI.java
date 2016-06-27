@@ -52,7 +52,7 @@ class PlatzVerkaufsWerkzeugUI
         
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         _verkaufenButton = new JButton("Verkaufen");
-        buttonPanel.add(_verkaufenButton);    
+//        buttonPanel.add(_verkaufenButton);    
         _stornierenButton = new JButton("Stornieren");
         buttonPanel.add(_stornierenButton);
         
