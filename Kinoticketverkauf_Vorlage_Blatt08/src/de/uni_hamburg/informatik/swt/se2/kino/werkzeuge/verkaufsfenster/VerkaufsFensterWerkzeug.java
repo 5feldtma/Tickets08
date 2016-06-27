@@ -85,6 +85,11 @@ public class VerkaufsFensterWerkzeug extends ObservableSubwerkzeug
         _verkaufsFensterService.reset();
         aktualisiereErhaltenenBetrag();
     }
+    
+    public void blockiere(boolean b)
+    {
+        _verkaufsFensterService.setError(b);
+    }
 
     /*
     private void beendeTransaktion()

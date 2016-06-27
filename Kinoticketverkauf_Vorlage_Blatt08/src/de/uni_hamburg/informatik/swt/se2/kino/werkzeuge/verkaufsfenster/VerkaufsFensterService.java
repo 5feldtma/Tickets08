@@ -5,11 +5,13 @@ public class VerkaufsFensterService
 
     private int _preis;
     private int _erhaltenerBetrag;
+    private boolean _error;
     
     public VerkaufsFensterService()
     {
-        _preis=0;
-        _erhaltenerBetrag=0;
+        _preis = 0;
+        _erhaltenerBetrag = 0;
+        _error = false;
     }
     
     /**
@@ -41,13 +43,21 @@ public class VerkaufsFensterService
     }
     
     /**
+     * Blockiert den OK-Button.
+     */
+    public void setError(boolean b)
+    {
+        _error = b;
+    }
+    
+    /**
      * Gibt zurück ob genug Geld gezahlt wird.
      * 
      * @ensure berechneRueckgeld() >= 0
      */
     public boolean istBetragAkzeptabel()
     {
-        return _erhaltenerBetrag >= _preis;
+        return (_erhaltenerBetrag >= _preis) && !_error;
     }
     
     /**

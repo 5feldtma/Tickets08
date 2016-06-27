@@ -133,22 +133,29 @@ public class PlatzVerkaufsWerkzeug
         if (istVerkaufenMoeglich(plaetze))
         {
             _derzeitigerPreis = _vorstellung.getPreisFuerPlaetze(plaetze);
+            _verkaufsFensterWerkzeug.blockiere(false);
             _ui.getPreisLabel().setText(
                     "Gesamtpreis: " + _derzeitigerPreis + " Eurocent");
         }
         else if (istStornierenMoeglich(plaetze))
         {
+            _derzeitigerPreis = 0;
+            _verkaufsFensterWerkzeug.blockiere(true);
             int preis = _vorstellung.getPreisFuerPlaetze(plaetze);
             _ui.getPreisLabel().setText(
                     "Gesamtstorno: " + preis + " Eurocent");
         }
         else if (!plaetze.isEmpty())
         {
+            _derzeitigerPreis = 0;
+            _verkaufsFensterWerkzeug.blockiere(true);
             _ui.getPreisLabel().setText(
                     "Verkauf und Storno nicht gleichzeitig möglich!");
         }
         else
         {
+            _derzeitigerPreis = 0;
+            _verkaufsFensterWerkzeug.blockiere(true);
             _ui.getPreisLabel().setText(
                     "Gesamtpreis: 0 Eurocent");
         }
